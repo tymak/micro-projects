@@ -65,29 +65,32 @@ const Monad = (initValue = 0, logs = []) => ({
 Monad.unit = value => Monad(value)
 
 
-const foo = x => x + 1
-const boo = x => x - 1
+// const foo = x => x + 1
+// const boo = x => x - 1
 
-const applyfoo = value => Monad(foo(value), ["apply foo"])
-const applyboo = value => Monad(boo(value), ["apply boo"])
+// const applyfoo = value => Monad(foo(value), ["apply foo"])
+// const applyboo = value => Monad(boo(value), ["apply boo"])
 
 
-// left identity check 
-// unit(value).flatMap(f) ≡ f(value)
-assert.deepStrictEqual(Monad.unit(0).flatMap(applyfoo).resolve(), applyfoo(0).resolve())
+// // left identity check 
+// // unit(value).flatMap(f) ≡ f(value)
+// assert.deepStrictEqual(Monad.unit(0).flatMap(applyfoo).resolve(), applyfoo(0).resolve())
 
-// right identity check
-// monad.flatMap(unit) ≡ monad -> unit is neutral element of flatmap(no changes)
-const unitFoo = x => x
-const applyunitfoo = value => Monad(unitFoo(value), [])
-const applyunitfoo2 = value => Monad.unit(value)
-const applyunitfoo3 = value => Monad(value, [])
-assert.deepStrictEqual(Monad(0).flatMap(applyunitfoo).resolve(), Monad(0).resolve())
-assert.deepStrictEqual(Monad(0).flatMap(applyunitfoo2).resolve(), Monad(0).resolve())
-assert.deepStrictEqual(Monad(0).flatMap(applyunitfoo3).resolve(), Monad(0).resolve())
+// // right identity check
+// // monad.flatMap(unit) ≡ monad -> unit is neutral element of flatmap(no changes)
+// const unitFoo = x => x
+// const applyunitfoo = value => Monad(unitFoo(value), [])
+// const applyunitfoo2 = value => Monad.unit(value)
+// const applyunitfoo3 = value => Monad(value, [])
+// assert.deepStrictEqual(Monad(0).flatMap(applyunitfoo).resolve(), Monad(0).resolve())
+// assert.deepStrictEqual(Monad(0).flatMap(applyunitfoo2).resolve(), Monad(0).resolve())
+// assert.deepStrictEqual(Monad(0).flatMap(applyunitfoo3).resolve(), Monad(0).resolve())
 
-// asociativity check
-// monad.flatMap(f).flatMap(g) ≡ monad.flatMap(x => f(x).flatMap(g))
-assert.deepStrictEqual(
-    Monad(0).flatMap(applyfoo).flatMap(applyboo).resolve(),
-    Monad(0).flatMap(x => applyfoo(x).flatMap(applyboo)).resolve())
+// // asociativity check
+// // monad.flatMap(f).flatMap(g) ≡ monad.flatMap(x => f(x).flatMap(g))
+// assert.deepStrictEqual(
+//     Monad(0).flatMap(applyfoo).flatMap(applyboo).resolve(),
+//     Monad(0).flatMap(x => applyfoo(x).flatMap(applyboo)).resolve()
+//     )
+
+module.exports = Monad
