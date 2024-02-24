@@ -10,16 +10,16 @@ const assert = require("assert")
 /**
  * A Monad structure.
  * @typedef {Object} Monad
- * @property {function(number): Monad} flatMap 
- * @property {function(): Result} resolve 
- * @property {function(): Monad} printValue 
- * @property {function(): Monad} printLogs 
+ * @property {function(number): Monad} flatMap
+ * @property {function(): Result} resolve
+ * @property {function(): Monad} printValue
+ * @property {function(): Monad} printLogs
  */
 
 /**
- * 
- * @param {Number} initValue 
- * @param {Array<string>} logs 
+ *
+ * @param {Number} initValue
+ * @param {Array<string>} logs
  * @returns {Monad}
  */
 
@@ -28,9 +28,9 @@ const Monad = (initValue = 0, logs = []) => ({
     logs: logs,
 
     /**
-     * 
-     * @param {Function} f 
-     * @returns 
+     *
+     * @param {Function} f
+     * @returns
      */
     flatMap: function (f) {
         const newMonad = f(this.value)
@@ -46,11 +46,11 @@ const Monad = (initValue = 0, logs = []) => ({
     },
     printValue: function () {
         console.log(this.value)
-        return Monad(this.value, this.logs)
+        return this
     },
     printLogs: function () {
         console.log(this.logs)
-        return Monad(this.value, this.logs)
+        return this
     }
 })
 
@@ -72,7 +72,7 @@ Monad.unit = value => Monad(value)
 // const applyboo = value => Monad(boo(value), ["apply boo"])
 
 
-// // left identity check 
+// // left identity check
 // // unit(value).flatMap(f) ≡ f(value)
 // assert.deepStrictEqual(Monad.unit(0).flatMap(applyfoo).resolve(), applyfoo(0).resolve())
 

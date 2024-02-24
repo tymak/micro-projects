@@ -1,6 +1,7 @@
 "use strict"
 const assert = require("assert")
 const MonadClass = require("../basicMonadClass")
+const Monad = require("../basicMonad");
 
 describe("Test of monadic laws for class syntax", () => {
 
@@ -11,7 +12,7 @@ describe("Test of monadic laws for class syntax", () => {
     const applyboo = value => new MonadClass(boo(value), ["apply boo"])
 
     it("should follow the left identity law", () => {
-        // left identity check 
+        // left identity check
         // unit(value).flatMap(f) ≡ f(value)
         assert.deepStrictEqual(
             MonadClass.unit(0).flatMap(applyfoo).resolve(),
@@ -46,6 +47,20 @@ describe("Test of monadic laws for class syntax", () => {
         assert.deepStrictEqual(
             new MonadClass(0).flatMap(applyfoo).flatMap(applyboo).resolve(),
             new MonadClass(0).flatMap(x => applyfoo(x).flatMap(applyboo)).resolve()
+        )
+    })
+
+    it("should be able to chain printvalue()",()=>{
+        assert.deepStrictEqual(
+            new MonadClass(0).flatMap(applyfoo).flatMap(applyboo).printValue().resolve(),
+            new MonadClass(0).flatMap(applyfoo).flatMap(applyboo).resolve()
+        )
+    })
+
+    it("should be able to chain printLogs()",()=>{
+        assert.deepStrictEqual(
+            new MonadClass(0).flatMap(applyfoo).flatMap(applyboo).printLogs().resolve(),
+            new MonadClass(0).flatMap(applyfoo).flatMap(applyboo).resolve()
         )
     })
 })

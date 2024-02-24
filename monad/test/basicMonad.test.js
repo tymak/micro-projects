@@ -11,7 +11,7 @@ describe("Test of monadic laws for functional syntax", () => {
     const applyboo = value => Monad(boo(value), ["apply boo"])
 
     it("should follow the left identity law", () => {
-        // left identity check 
+        // left identity check
         // unit(value).flatMap(f) ≡ f(value)
         assert.deepStrictEqual(
             Monad.unit(0).flatMap(applyfoo).resolve(),
@@ -50,7 +50,19 @@ describe("Test of monadic laws for functional syntax", () => {
             Monad(0).flatMap(applyfoo).flatMap(applyboo).resolve(),
             Monad(0).flatMap(x => applyfoo(x).flatMap(applyboo)).resolve()
         )
-
     })
 
+    it("should be able to chain printvalue()",()=>{
+        assert.deepStrictEqual(
+            Monad(0).flatMap(applyfoo).flatMap(applyboo).resolve(),
+            Monad(0).flatMap(applyfoo).flatMap(applyboo).printValue().resolve()
+        )
+    })
+
+    it("should be able to chain printLogs()",()=>{
+        assert.deepStrictEqual(
+            Monad(0).flatMap(applyfoo).flatMap(applyboo).resolve(),
+            Monad(0).flatMap(applyfoo).flatMap(applyboo).printLogs().resolve()
+        )
+    })
 })
