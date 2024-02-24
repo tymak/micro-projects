@@ -5,6 +5,5 @@
             "name": "basicMonad test",
             "file": "monad/test/basicMonad.test.js",
         },
-        
     ]
 }
