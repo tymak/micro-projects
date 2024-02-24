@@ -15,6 +15,7 @@ class MonadClass {
         const newLogs = [...this.logs, ...newMonad.logs]
         return new MonadClass(newValue, newLogs)
     }
+
     resolve() {
         return {
             value: this.value,
@@ -23,11 +24,11 @@ class MonadClass {
     }
     printValue() {
         console.log(this.value)
-        return new MonadClass(this.value, this.logs)
+        return this
     }
     printLogs() {
         console.log(this.logs)
-        return new MonadClass(this.value, this.logs)
+        return this
     }
 }
 
