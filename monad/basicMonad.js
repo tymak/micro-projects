@@ -90,4 +90,4 @@ assert.deepStrictEqual(Monad(0).flatMap(applyunitfoo3).resolve(), Monad(0).resol
 // monad.flatMap(f).flatMap(g) ≡ monad.flatMap(x => f(x).flatMap(g))
 assert.deepStrictEqual(
     Monad(0).flatMap(applyfoo).flatMap(applyboo).resolve(),
-    Monad(1).flatMap(x => applyfoo(x).flatMap(applyboo)).resolve())
+    Monad(0).flatMap(x => applyfoo(x).flatMap(applyboo)).resolve())
