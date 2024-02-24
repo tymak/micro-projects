@@ -1,5 +1,6 @@
 'use strict';
 const assert = require('assert');
+const { it, describe } = require('mocha');
 const Monad = require('../basicMonad');
 
 describe('Test of monadic laws for functional syntax', () => {
