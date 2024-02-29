@@ -1,5 +1,5 @@
-"use strict"
-const assert = require("assert")
+'use strict';
+const assert = require('assert');
 
 /**
  * @typedef {Object} Result
@@ -24,35 +24,35 @@ const assert = require("assert")
  */
 
 const Monad = (initValue = 0, logs = []) => ({
-    value: initValue,
-    logs: logs,
+  value: initValue,
+  logs: logs,
 
-    /**
-     *
-     * @param {Function} f
-     * @returns
-     */
-    flatMap: function (f) {
-        const newMonad = f(this.value)
-        const newValue = newMonad.value
-        const newLogs = [...this.logs, ...newMonad.logs]
-        return Monad(newValue, newLogs)
-    },
-    resolve: function () {
-        return {
-            value: this.value,
-            logs: this.logs
-        }
-    },
-    printValue: function () {
-        console.log(this.value)
-        return this
-    },
-    printLogs: function () {
-        console.log(this.logs)
-        return this
-    }
-})
+  /**
+   *
+   * @param {Function} f
+   * @returns
+   */
+  flatMap: function (f) {
+    const newMonad = f(this.value);
+    const newValue = newMonad.value;
+    const newLogs = [...this.logs, ...newMonad.logs];
+    return Monad(newValue, newLogs);
+  },
+  resolve: function () {
+    return {
+      value: this.value,
+      logs: this.logs,
+    };
+  },
+  printValue: function () {
+    console.log(this.value);
+    return this;
+  },
+  printLogs: function () {
+    console.log(this.logs);
+    return this;
+  },
+});
 
 /**
  * Unit function for creating a new Monad with an initial value and empty logs.
@@ -62,15 +62,13 @@ const Monad = (initValue = 0, logs = []) => ({
  * @param {Number} value - The initial value for the Monad.
  * @returns {Monad} - A new Monad instance.
  */
-Monad.unit = value => Monad(value)
-
+Monad.unit = (value) => Monad(value);
 
 // const foo = x => x + 1
 // const boo = x => x - 1
 
 // const applyfoo = value => Monad(foo(value), ["apply foo"])
 // const applyboo = value => Monad(boo(value), ["apply boo"])
-
 
 // // left identity check
 // // unit(value).flatMap(f) ≡ f(value)
@@ -93,4 +91,4 @@ Monad.unit = value => Monad(value)
 //     Monad(0).flatMap(x => applyfoo(x).flatMap(applyboo)).resolve()
 //     )
 
-module.exports = Monad
+module.exports = Monad;

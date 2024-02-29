@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "mocha ./**/test/*.test.js"
+    "testMonad": "mocha ./monad/test/*.{js,ts}"
   },
   "devDependencies": {
     "@types/node": "^20.11.20",
