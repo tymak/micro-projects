@@ -1,5 +1,4 @@
 'use strict';
-const assert = require('assert');
 
 /**
  * @typedef {Object} Result
